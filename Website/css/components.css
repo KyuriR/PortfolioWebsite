@@ -1,0 +1,21 @@
+/* ============================================================
+   components.css — Shared component styles
+   Used across multiple inner pages
+   Global design tokens live in style.css
+   ============================================================ */
+
+/* ── Page header (shared by about, skills, projects, contact) ── */
+.page-header {
+  padding: 80px 48px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .page-header { padding: 64px 32px 48px; }
+}
+
+@media (max-width: 768px) {
+  .page-header { padding: 48px 20px 36px; }
+}

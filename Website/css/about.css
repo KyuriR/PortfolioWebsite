@@ -1,0 +1,275 @@
+/* ============================================================
+   about.css — Styles for about.html
+   Depends on: style.css, components.css
+   ============================================================ */
+
+/* ── About grid layout ── */
+.about-grid {
+  padding: 80px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: start;
+}
+
+.bio-text h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.bio-text p {
+  color: var(--white-dim);
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+/* ── Profile card ── */
+.profile-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(33, 150, 243, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+.profile-img-area {
+  height: 220px;
+  background: linear-gradient(135deg, var(--blue-1) 0%, var(--bg-mid) 60%, #001830 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-img-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232196f3' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.profile-initials {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(33, 150, 243, 0.15);
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--blue-bright);
+  z-index: 1;
+}
+
+.profile-info {
+  padding: 24px;
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.profile-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-accent);
+  margin-bottom: 20px;
+}
+
+.profile-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.profile-detail .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--blue-accent);
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.profile-detail span {
+  font-size: 0.8rem;
+  color: var(--white-dim);
+}
+
+/* ── Education timeline ── */
+.timeline-section {
+  padding: 0 48px 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--blue-accent), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -30px;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  border: 2px solid var(--white-faint);
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.timeline-item.active .timeline-dot,
+.timeline-item:hover .timeline-dot {
+  border-color: var(--blue-accent);
+  background: var(--blue-accent);
+  box-shadow: 0 0 12px rgba(33, 150, 243, 0.5);
+}
+
+.timeline-header {
+  background: var(--bg-card);
+  border: 1px solid rgba(33, 150, 243, 0.1);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.timeline-item:hover .timeline-header,
+.timeline-item.active .timeline-header {
+  border-color: rgba(33, 150, 243, 0.3);
+  background: var(--bg-card-hover);
+}
+
+.timeline-meta h4 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.timeline-meta .tl-institution {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--blue-accent);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--white-faint);
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.timeline-chevron {
+  color: var(--white-faint);
+  transition: transform var(--transition);
+  margin-left: 12px;
+  font-size: 0.8rem;
+}
+
+.timeline-item.active .timeline-chevron {
+  transform: rotate(180deg);
+  color: var(--blue-accent);
+}
+
+.timeline-body {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid rgba(33, 150, 243, 0.1);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 20px 24px 24px;
+  animation: slideDown 0.25s ease;
+}
+
+.timeline-item.active .timeline-body {
+  display: block;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.timeline-body p {
+  font-size: 0.85rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.timeline-body .tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tl-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+  background: rgba(33, 150, 243, 0.12);
+  color: var(--blue-bright);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    padding: 48px 24px;
+    gap: 40px;
+  }
+
+  .profile-card {
+    position: static;
+  }
+
+  .timeline-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
