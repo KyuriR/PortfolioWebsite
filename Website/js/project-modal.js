@@ -1,17 +1,9 @@
-// project-modal.js
-// Opens a modal popup when the user clicks "Details" on a project card
-// The modal shows the project title, screenshots, description, tech stack, and GitHub link
-// Screenshots can be clicked to open the lightbox
 
-// Project data array - each object holds all the information for one project
 var projects = [
     {
         num: 'Project 01',
         title: 'Taxi Runner',
-        screenshots: [
-            '../assets/pictures/TaxiRunner.png',
-            '../assets/pictures/TaxiRunner2.png'
-        ],
+        screenshots: ['../assets/pictures/TaxiRunner.png','../assets/pictures/TaxiRunner2.png'],
         description: '<h4>Overview</h4>'
             + '<p>Taxi Runner is a fast-paced endless runner game set in the streets of Johannesburg, drawing inspiration from South Africa\'s iconic minibus taxi culture. The player controls a taxi navigating busy urban roads, dodging obstacles and collecting passengers to rack up points.</p>'
             + '<h4>Design &amp; Development</h4>'
@@ -24,10 +16,7 @@ var projects = [
     {
         num: 'Project 02',
         title: 'Neighbourhood Nightmare',
-        screenshots: [
-            '../assets/pictures/NN.png',
-            '../assets/pictures/NN2.png'
-        ],
+        screenshots: ['../assets/pictures/NN.png','../assets/pictures/NN2.png'],
         description: '<h4>Overview</h4>'
             + '<p>Neighbourhood Nightmare is a top-down survival horror game where the player must escape a cursed residential neighbourhood. The atmosphere is built through dynamic lighting, sound design, and enemy AI that reacts to the player\'s movement and noise level.</p>'
             + '<h4>Design &amp; Development</h4>'
@@ -40,10 +29,7 @@ var projects = [
     {
         num: 'Project 03',
         title: 'Project Zero',
-        screenshots: [
-            '../assets/pictures/PatientZero.png',
-            '../assets/pictures/PatientZero2.png'
-        ],
+        screenshots: ['../assets/pictures/PatientZero.png','../assets/pictures/PatientZero2.png'],
         description: '<h4>Overview</h4>'
             + '<p>Project Zero is a stealth-action prototype set in a near-future dystopia where surveillance systems and armed guards patrol a corporate facility. The player must infiltrate the building, retrieve classified data, and escape without being detected.</p>'
             + '<h4>Design &amp; Development</h4>'
@@ -56,11 +42,7 @@ var projects = [
     {
         num: 'Project 04',
         title: 'Morabaraba',
-        screenshots: [
-            '../assets/pictures/Morabaraba.png',
-            '../assets/pictures/Morabaraba2.png'
-
-        ],
+        screenshots: ['../assets/pictures/Morabaraba.png','../assets/pictures/Morabaraba2.png'],
         description: '<h4>Overview</h4>'
             + '<p>Morabaraba is a digital implementation of the traditional South African strategy board game, also known as Umlabalaba. Players place and move pieces to form "mills" — lines of three — which allow them to remove an opponent\'s piece. The last player with two or more pieces wins.</p>'
             + '<h4>Design &amp; Development</h4>'
