@@ -1,180 +1,170 @@
-/* ============================================================
-   project-modal.js — Project detail modal
-   Opens on card click or "Details" button
-   Screenshots inside the modal trigger the lightbox
-   ============================================================ */
+// project-modal.js
+// Opens a modal popup when the user clicks "Details" on a project card
+// The modal shows the project title, screenshots, description, tech stack, and GitHub link
+// Screenshots can be clicked to open the lightbox
 
-(function () {
-  /* ── Project data ── */
-  const projects = [
+// Project data array - each object holds all the information for one project
+var projects = [
     {
-      num:   'Project 01',
-      title: 'This Portfolio',
-      screenshots: ['🌐', '🎨'],
-      screenshotBg: [
-        'linear-gradient(135deg,#0a2540,#001a35)',
-        'linear-gradient(135deg,#0a3d6b,#0a2540)',
-      ],
-      desc: `
-        <h4>Overview</h4>
-        <p>This portfolio website was designed and built from scratch for the Interactive Media 3A final exam. It represents the production release of the Product Requirements Document submitted as Assignment 1.</p>
-        <h4>Design Concept</h4>
-        <p>The guiding concept is "The Methodical Creative" — a portfolio that reflects both technical precision and personal creative identity. The piano-inspired animations on the homepage reference my background as a pianist and differentiate the site from generic developer portfolios.</p>
-        <h4>Technical Approach</h4>
-        <p>The site uses vanilla HTML, CSS, and JavaScript only — no frameworks or libraries. Each JavaScript interaction lives in its own file, demonstrating clean separation of concerns. The piano tile animation on the homepage is rendered entirely on HTML Canvas using a custom snake algorithm.</p>`,
-      tech:   ['HTML5', 'CSS3', 'JavaScript', 'Canvas API', 'Git', 'GitHub Pages'],
-      github: 'https://github.com',
+        num: 'Project 01',
+        title: 'Taxi Runner',
+        screenshots: [
+            '../assets/pictures/TaxiRunner.png',
+            '../assets/pictures/TaxiRunner2.png'
+        ],
+        description: '<h4>Overview</h4>'
+            + '<p>Taxi Runner is a fast-paced endless runner game set in the streets of Johannesburg, drawing inspiration from South Africa\'s iconic minibus taxi culture. The player controls a taxi navigating busy urban roads, dodging obstacles and collecting passengers to rack up points.</p>'
+            + '<h4>Design &amp; Development</h4>'
+            + '<p>The game was built in Unity using C#. Level design focused on creating a sense of speed and urban chaos while keeping controls intuitive. The scoring system rewards risk-taking — weaving through tight gaps yields higher multipliers.</p>'
+            + '<h4>Challenges</h4>'
+            + '<p>The main challenge was balancing difficulty progression to keep the game engaging without becoming frustrating. I implemented a dynamic obstacle spawn system that increases density and speed over time, using Unity\'s coroutine system to manage timing cleanly.</p>',
+        tech: ['Unity', 'C#', 'Game Design', 'Level Design'],
+        github: 'https://github.com/KyuriR'
     },
     {
-      num:   'Project 02',
-      title: 'Climate Data Dashboard',
-      screenshots: ['📊', '📈'],
-      screenshotBg: [
-        'linear-gradient(135deg,#1a0a30,#0d0520)',
-        'linear-gradient(135deg,#2a1050,#1a0a30)',
-      ],
-      desc: `
-        <h4>Overview</h4>
-        <p>An interactive data visualisation dashboard built for a second-year project. The dashboard presents South African climate data trends — rainfall, temperature, and drought indices — from 1990 to 2024.</p>
-        <h4>Technical Approach</h4>
-        <p>D3.js was used to build the charts, with custom tooltips, animated transitions between data views, and a filter system allowing users to select region and date range. The Canvas API handles the background particle animation that reflects climate intensity.</p>
-        <h4>Challenges</h4>
-        <p>The most complex challenge was normalising inconsistent source data from multiple government datasets and making the charts update responsively when the user applies filters.</p>`,
-      tech:   ['JavaScript', 'D3.js', 'Canvas API', 'Python', 'Pandas'],
-      github: 'https://github.com',
+        num: 'Project 02',
+        title: 'Neighbourhood Nightmare',
+        screenshots: [
+            '../assets/pictures/NN.png',
+            '../assets/pictures/NN2.png'
+        ],
+        description: '<h4>Overview</h4>'
+            + '<p>Neighbourhood Nightmare is a top-down survival horror game where the player must escape a cursed residential neighbourhood. The atmosphere is built through dynamic lighting, sound design, and enemy AI that reacts to the player\'s movement and noise level.</p>'
+            + '<h4>Design &amp; Development</h4>'
+            + '<p>Built in Unity with C#, the game uses a sight and sound detection system for enemies — they respond to both line-of-sight and audio cues, forcing the player to think carefully about movement. The lighting system uses Unity\'s Universal Render Pipeline to create a dark, tense environment where visibility is limited.</p>'
+            + '<h4>Challenges</h4>'
+            + '<p>Implementing the dual-detection AI was the most complex part of the project. I designed a state machine with four states — Idle, Patrol, Alert, and Chase — that transitions based on detection thresholds. Getting these transitions to feel natural required significant playtesting and tuning.</p>',
+        tech: ['Unity', 'C#', 'AI State Machine', 'URP Lighting', 'Horror Design'],
+        github: 'https://github.com/KyuriR'
     },
     {
-      num:   'Project 03',
-      title: 'Maze Runner',
-      screenshots: ['🎮', '🗺️'],
-      screenshotBg: [
-        'linear-gradient(135deg,#0a2010,#051505)',
-        'linear-gradient(135deg,#154025,#0a2010)',
-      ],
-      desc: `
-        <h4>Overview</h4>
-        <p>Maze Runner is a 2D top-down puzzle game built for a C++ module project. The game features procedurally generated mazes, a player character with smooth movement, collectible keys, and enemy AI that uses a basic BFS pathfinding algorithm.</p>
-        <h4>Technical Approach</h4>
-        <p>Built in C++ using the SFML library for graphics, audio, and input handling. Mazes are generated using Recursive Backtracker (DFS). Enemy pathfinding uses BFS from enemy position to player position, recalculated every 10 frames.</p>
-        <h4>Challenges</h4>
-        <p>Getting smooth movement, collision detection, and enemy AI to work together without lag was the key engineering challenge. I profiled the code and refactored the collision system to use grid-based cell checks instead of per-pixel tests.</p>`,
-      tech:   ['C++', 'SFML', 'Algorithms', 'Game Design'],
-      github: 'https://github.com',
+        num: 'Project 03',
+        title: 'Project Zero',
+        screenshots: [
+            '../assets/pictures/PatientZero.png',
+            '../assets/pictures/PatientZero2.png'
+        ],
+        description: '<h4>Overview</h4>'
+            + '<p>Project Zero is a stealth-action prototype set in a near-future dystopia where surveillance systems and armed guards patrol a corporate facility. The player must infiltrate the building, retrieve classified data, and escape without being detected.</p>'
+            + '<h4>Design &amp; Development</h4>'
+            + '<p>Built in C++ using SFML, the game features a line-of-sight detection system where guards have a visible cone of vision that the player must avoid. A cover mechanic allows the player to duck behind objects, temporarily hiding from detection.</p>'
+            + '<h4>Challenges</h4>'
+            + '<p>Implementing accurate line-of-sight raycasting in SFML without a built-in physics engine required building a custom collision and visibility system from scratch. This was a significant engineering challenge that deepened my understanding of computational geometry and 2D spatial logic.</p>',
+        tech: ['C++', 'SFML', 'Raycasting', 'Stealth Mechanics', 'Game Design'],
+        github: 'https://github.com/KyuriR'
     },
     {
-      num:   'Project 04',
-      title: 'Community Lending App',
-      screenshots: ['📱', '🔍'],
-      screenshotBg: [
-        'linear-gradient(135deg,#1a1000,#100800)',
-        'linear-gradient(135deg,#3a2800,#1a1000)',
-      ],
-      desc: `
-        <h4>Overview</h4>
-        <p>A UX design case study for a peer-to-peer community lending application targeting underserved communities in South Africa. The project covered the full UX process from initial research through to a high-fidelity Figma prototype.</p>
-        <h4>Research Process</h4>
-        <p>I conducted desk research on informal lending patterns in SA communities, created two detailed personas, mapped user flows for key lending and borrowing scenarios, and produced mid-fidelity wireframes before moving to visual design.</p>
-        <h4>Design Outcome</h4>
-        <p>The final prototype demonstrates a trust-centred interface with clear status indicators, community reputation systems, and a simplified loan request flow designed for users with limited smartphone experience.</p>`,
-      tech:  ['Figma', 'UX Research', 'User Personas', 'Wireframing', 'Prototyping'],
-      figma: 'https://figma.com',
-    },
-    {
-      num:   'Project 05',
-      title: 'Python Data Scraper',
-      screenshots: ['🐍', '📋'],
-      screenshotBg: [
-        'linear-gradient(135deg,#001828,#000d18)',
-        'linear-gradient(135deg,#002030,#001828)',
-      ],
-      desc: `
-        <h4>Overview</h4>
-        <p>A Python command-line tool that scrapes, cleans, and visualises publicly available data from tech trend aggregators. The tool produces charts showing technology popularity trends over time.</p>
-        <h4>Technical Approach</h4>
-        <p>BeautifulSoup handles HTML parsing, Pandas manages data cleaning and aggregation, and Matplotlib generates the output charts. The tool is configurable via a simple JSON config file.</p>
-        <h4>Use Case</h4>
-        <p>Built out of personal curiosity to understand how to programmatically track technology trends. It reinforced my understanding of Python, data pipelines, and reproducible data processing.</p>`,
-      tech:   ['Python', 'BeautifulSoup', 'Pandas', 'Matplotlib', 'CLI'],
-      github: 'https://github.com',
-    },
-  ];
+        num: 'Project 04',
+        title: 'Morabaraba',
+        screenshots: [
+            '../assets/pictures/Morabaraba.png',
+            '../assets/pictures/Morabaraba2.png'
 
-  /* ── Modal elements ── */
-  const modal      = document.getElementById('project-modal');
-  const modalClose = document.getElementById('modal-close');
+        ],
+        description: '<h4>Overview</h4>'
+            + '<p>Morabaraba is a digital implementation of the traditional South African strategy board game, also known as Umlabalaba. Players place and move pieces to form "mills" — lines of three — which allow them to remove an opponent\'s piece. The last player with two or more pieces wins.</p>'
+            + '<h4>Design &amp; Development</h4>'
+            + '<p>Built in C# with Unity, the game supports two-player local play and a single-player mode against an AI opponent. The AI uses a minimax algorithm with alpha-beta pruning to evaluate board states and select optimal moves.</p>'
+            + '<h4>Challenges</h4>'
+            + '<p>Implementing minimax with alpha-beta pruning required careful design of the board evaluation function — assigning scores to mill formations, mobility, and piece count. Balancing AI difficulty so it was challenging but not unbeatable required multiple iterations of the heuristic weights.</p>',
+        tech: ['C#', 'Unity', 'Minimax AI', 'Alpha-Beta Pruning', 'Board Game Design'],
+        github: 'https://github.com/KyuriR/ELEN3020Morabaraba'
+    }
+];
 
-  if (!modal) return;
+// Get the modal element from the page
+var modal = document.getElementById('project-modal');
+var modalCloseBtn = document.getElementById('modal-close');
 
-  function openModal(idx) {
-    const p = projects[idx];
+// Only set up the modal if it exists on this page
+if (modal) {
 
-    document.getElementById('modal-num').textContent   = p.num;
-    document.getElementById('modal-title').textContent = p.title;
+    // openModal: fills the modal with project data and makes it visible
+    function openModal(index) {
+        var project = projects[index];
+        if (!project) return;
 
-    /* Screenshots — clicking opens lightbox */
-    document.getElementById('modal-screenshots').innerHTML = p.screenshots.map((icon, i) => {
-      const svgSrc = `data:image/svg+xml,${encodeURIComponent(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500">
-          <rect width="800" height="500" fill="%23091222"/>
-          <text x="400" y="250" font-family="serif" font-size="100"
-                fill="%234fc3f7" text-anchor="middle" dominant-baseline="middle">${icon}</text>
-        </svg>`
-      )}`;
-      return `
-        <div class="modal-screenshot"
-             style="background:${p.screenshotBg[i]}; cursor:zoom-in;"
-             onclick="window.openLightbox('${svgSrc}', '${p.title} screenshot ${i + 1}')">
-          <span style="font-size:3rem;">${icon}</span>
-        </div>`;
-    }).join('');
+        // Fill in the project number and title
+        document.getElementById('modal-num').textContent = project.num;
+        document.getElementById('modal-title').textContent = project.title;
 
-    document.getElementById('modal-desc').innerHTML = p.desc;
+        // Build the screenshots section
+        // Each screenshot is clickable and opens the lightbox
+        var screenshotsHTML = '';
+        for (var i = 0; i < project.screenshots.length; i++) {
+            var src = project.screenshots[i];
+            screenshotsHTML += '<div class="modal-screenshot" style="cursor:zoom-in; overflow:hidden;"'
+                + ' onclick="openLightbox(\'' + src + '\', \'' + project.title + ' screenshot ' + (i + 1) + '\')">'
+                + '<img src="' + src + '" alt="' + project.title + ' screenshot ' + (i + 1) + '"'
+                + ' style="width:100%; height:100%; object-fit:cover; display:block;">'
+                + '</div>';
+        }
+        document.getElementById('modal-screenshots').innerHTML = screenshotsHTML;
 
-    document.getElementById('modal-tech').innerHTML = p.tech
-      .map(t => `<span class="carousel-tag">${t}</span>`)
-      .join('');
+        // Fill in the project description
+        document.getElementById('modal-desc').innerHTML = project.description;
 
-    let actions = '';
-    if (p.github) actions += `<a href="${p.github}" target="_blank" class="btn btn-primary">View on GitHub</a>`;
-    if (p.figma)  actions += `<a href="${p.figma}"  target="_blank" class="btn btn-primary">View in Figma</a>`;
-    actions += `<button class="btn btn-outline" id="modal-close-btn">Close</button>`;
-    document.getElementById('modal-actions').innerHTML = actions;
+        // Build the tech tags
+        var techHTML = '';
+        for (var j = 0; j < project.tech.length; j++) {
+            techHTML += '<span class="carousel-tag">' + project.tech[j] + '</span>';
+        }
+        document.getElementById('modal-tech').innerHTML = techHTML;
 
-    document.getElementById('modal-close-btn')?.addEventListener('click', closeModal);
+        // Build the action buttons
+        var actionsHTML = '';
+        if (project.github) {
+            actionsHTML += '<a href="' + project.github + '" target="_blank" class="btn btn-primary">View on GitHub</a>';
+        }
+        actionsHTML += '<button class="btn btn-outline" id="modal-close-btn">Close</button>';
+        document.getElementById('modal-actions').innerHTML = actionsHTML;
 
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+        // Attach click event to the close button inside the modal
+        var innerCloseBtn = document.getElementById('modal-close-btn');
+        if (innerCloseBtn) {
+            innerCloseBtn.addEventListener('click', closeModal);
+        }
 
-  function closeModal() {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+        // Show the modal and prevent background scrolling
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
 
-  function initModal() {
-    /* Bind project cards */
-    document.querySelectorAll('.project-card').forEach((card, i) => {
-      card.querySelector('.btn-primary')?.addEventListener('click', e => {
-        e.stopPropagation();
-        openModal(i);
-      });
-      card.addEventListener('click', () => openModal(i));
+    // closeModal: hides the modal and re-enables page scrolling
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Attach click events to all Details buttons in the fan carousel
+    var detailButtons = document.querySelectorAll('.fan-details-btn');
+    for (var b = 0; b < detailButtons.length; b++) {
+        detailButtons[b].addEventListener('click', function (e) {
+            // Stop the click from triggering the slide change in carousel.js
+            e.stopPropagation();
+
+            // Get the project index from the data-project attribute
+            var projectIndex = parseInt(this.getAttribute('data-project'));
+            openModal(projectIndex);
+        });
+    }
+
+    // Close the modal when the X button is clicked
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    // Close the modal when the dark background area is clicked
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            closeModal();
+        }
     });
 
-    modalClose?.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) closeModal();
+    // Close the modal when the Escape key is pressed
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
+        }
     });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initModal);
-  } else {
-    initModal();
-  }
-})();
+}

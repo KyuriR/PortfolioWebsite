@@ -1,33 +1,27 @@
-/* ============================================================
-   timeline.js — Interactive education timeline
-   Clicking a timeline item expands it; clicking again collapses
-   Only one item open at a time
-   ============================================================ */
+// timeline.js
+// Makes the education timeline interactive
+// Clicking a timeline item expands it to show more detail
+// Clicking an already open item closes it
+// Only one item can be open at a time
 
-(function () {
-  function initTimeline() {
-    const items = document.querySelectorAll('.timeline-item');
-    if (!items.length) return;
+// Get all timeline items
+var timelineItems = document.querySelectorAll('.timeline-item');
 
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
+// Add a click event to each item
+for (var i = 0; i < timelineItems.length; i++) {
+    timelineItems[i].addEventListener('click', function () {
+        // Check if this item is already open
+        var isAlreadyOpen = this.classList.contains('active');
 
-        /* Close all */
-        items.forEach(i => i.classList.remove('active'));
+        // Close all timeline items first
+        for (var j = 0; j < timelineItems.length; j++) {
+            timelineItems[j].classList.remove('active');
+        }
 
-        /* Toggle clicked item */
-        if (!isActive) item.classList.add('active');
-      });
+        // If the item was not already open, open it
+        // If it was already open, it stays closed (toggled off)
+        if (!isAlreadyOpen) {
+            this.classList.add('active');
+        }
     });
-
-    /* Open first item by default */
-    items[0]?.classList.add('active');
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTimeline);
-  } else {
-    initTimeline();
-  }
-})();
+}

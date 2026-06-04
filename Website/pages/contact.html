@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Kyuri Reddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body>
+  <div id="nav-container"></div>
+
+  <div class="page-wrapper">
+
+    <header class="page-header">
+      <div class="section-tag">Get In Touch</div>
+      <h1 class="section-heading">Let's Connect</h1>
+      <div class="divider"></div>
+      <p class="section-sub" style="margin-bottom:0;">
+        Open to graduate programme applications, junior developer roles, and freelance projects.
+      </p>
+    </header>
+
+    <div class="contact-layout">
+
+      <!-- Contact Info -->
+      <div class="contact-info reveal">
+        <h3>I'd love to hear from you</h3>
+        <p>Whether you're a recruiter with an opportunity, a hiring manager looking for a junior developer, or someone with an interesting project — my inbox is open.</p>
+
+        <a class="contact-item" href="mailto:kyuri.reddy@gmail.com">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-item-content">
+            <div class="ci-label">Email</div>
+            <div class="ci-value">kyuri.reddy@gmail.com</div>
+          </div>
+        </a>
+
+        <a class="contact-item" href="tel:+27000000000">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-content">
+            <div class="ci-label">Phone</div>
+            <div class="ci-value">+27 (0) 00 000 0000</div>
+          </div>
+        </a>
+
+        <div class="contact-item" style="cursor:default; pointer-events:none;">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-content">
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Johannesburg, South Africa</div>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="https://github.com/KyuriR" target="_blank" class="social-btn">GitHub</a>
+          <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
+        </div>
+
+        <div style="margin-top:36px; padding:20px; background:rgba(33,150,243,0.06); border:1px solid rgba(33,150,243,0.15); border-radius:8px;">
+          <div class="section-tag" style="margin-bottom:8px; font-size:0.58rem;">Current Availability</div>
+          <p style="font-size:0.82rem; color:var(--white-dim); line-height:1.7; margin:0;">
+            I am completing my final year of study in 2026 and actively seeking graduate programme placements, junior developer roles, and internship opportunities beginning <strong style="color:var(--white);">January 2027</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrap reveal">
+        <div class="section-tag" style="margin-bottom:20px;">Send a Message</div>
+        <form id="contact-form" novalidate>
+
+          <div class="form-group" id="fg-name">
+            <label class="form-label" for="f-name">Full Name *</label>
+            <input class="form-input" id="f-name" type="text" placeholder="Your name" autocomplete="name">
+            <span class="form-check">✓</span>
+            <span class="form-error-msg" id="err-name">Please enter your name.</span>
+          </div>
+
+          <div class="form-group" id="fg-email">
+            <label class="form-label" for="f-email">Email Address *</label>
+            <input class="form-input" id="f-email" type="email" placeholder="your@email.com" autocomplete="email">
+            <span class="form-check">✓</span>
+            <span class="form-error-msg" id="err-email">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group" id="fg-subject">
+            <label class="form-label" for="f-subject">Subject *</label>
+            <select class="form-select" id="f-subject">
+              <option value="">Select a subject…</option>
+              <option value="graduate">Graduate Programme Opportunity</option>
+              <option value="job">Job / Internship</option>
+              <option value="freelance">Freelance Project</option>
+              <option value="collab">Collaboration</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="form-error-msg" id="err-subject">Please select a subject.</span>
+          </div>
+
+          <div class="form-group" id="fg-message">
+            <label class="form-label" for="f-message">Message * <span id="msg-chars" class="char-count">0 / 1000</span></label>
+            <textarea class="form-textarea" id="f-message" placeholder="Tell me about your opportunity or project…" maxlength="1000"></textarea>
+            <span class="form-error-msg" id="err-message">Please write a message (minimum 20 characters).</span>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn btn-primary" id="submit-btn">
+              Send Message →
+            </button>
+            <span class="form-submit-status" id="submit-status"></span>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-reveal.js"></script>
+  <script src="../js/form-validation.js"></script>
+</body>
+</html>

@@ -1,34 +1,38 @@
-/* ============================================================
-   skill-toggle.js — Skill card flip interaction
-   Flips a card to reveal extra info when "More Info" is clicked
-   Unflips when "Back" is clicked
-   ============================================================ */
+// skill-toggle.js
+// Handles the flip interaction on skill cards
+// Clicking "More Info" flips the card to show extra detail
+// Clicking "Back" flips it back to the front
 
-(function () {
-  function initSkillToggle() {
-    document.querySelectorAll('.skill-card-wrap').forEach(wrap => {
-      const moreBtn  = wrap.querySelector('.skill-more-btn');
-      const backBtn  = wrap.querySelector('.skill-back-close');
+// Get all skill card wrappers
+var skillCards = document.querySelectorAll('.skill-card-wrap');
 
-      if (moreBtn) {
-        moreBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          wrap.classList.add('flipped');
+// Loop through each card and attach click events
+for (var i = 0; i < skillCards.length; i++) {
+    var card = skillCards[i];
+
+    var moreBtn = card.querySelector('.skill-more-btn');
+    var backBtn = card.querySelector('.skill-back-close');
+
+    // When "More Info" is clicked, flip the card to show the back
+    if (moreBtn) {
+        moreBtn.addEventListener('click', function (e) {
+            // Stop the click from bubbling up to any parent elements
+            e.stopPropagation();
+
+            // Find the parent card and add the flipped class
+            var parentCard = e.target.closest('.skill-card-wrap');
+            parentCard.classList.add('flipped');
         });
-      }
+    }
 
-      if (backBtn) {
-        backBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          wrap.classList.remove('flipped');
+    // When "Back" is clicked, flip the card back to the front
+    if (backBtn) {
+        backBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            // Find the parent card and remove the flipped class
+            var parentCard = e.target.closest('.skill-card-wrap');
+            parentCard.classList.remove('flipped');
         });
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSkillToggle);
-  } else {
-    initSkillToggle();
-  }
-})();
+    }
+}

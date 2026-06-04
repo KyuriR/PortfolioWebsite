@@ -1,58 +1,109 @@
-/* ============================================================
-   carousel.js — Project preview carousel
-   Controls: prev/next buttons, dot indicators, auto-advance
-   Auto-advance pauses on hover
-   ============================================================ */
+// carousel.js
+// Controls the fan-style project carousel on the projects page
+// Three slides are visible at once — the centre one is large, the two side ones are smaller
+// Clicking a side slide brings it to the centre
 
-(function () {
-  function initCarousel() {
-    const track    = document.getElementById('carousel-track');
-    const slides   = document.querySelectorAll('.carousel-slide');
-    const dots     = document.querySelectorAll('.carousel-dot');
-    const prevBtn  = document.getElementById('carousel-prev');
-    const nextBtn  = document.getElementById('carousel-next');
-    const container = document.getElementById('carousel');
+// Get all slides and dot indicators
+var slides = document.querySelectorAll('.fan-slide');
+var dots = document.querySelectorAll('.fan-dot');
+var prevBtn = document.getElementById('fan-prev');
+var nextBtn = document.getElementById('fan-next');
 
-    if (!track || !slides.length) return;
+// If there are no slides on this page, stop here
+if (slides.length === 0) {
+    // Do nothing - this script is not needed on this page
+} else {
+    var totalSlides = slides.length;
+    var currentIndex = 0;
 
-    let current  = 0;
-    let autoplay = null;
+    // updateCarousel: positions all slides based on the current active index
+    function updateCarousel() {
+        for (var i = 0; i < slides.length; i++) {
+            // Remove all position classes first
+            slides[i].classList.remove('fan-active', 'fan-left', 'fan-right', 'fan-hidden');
 
-    function goTo(n) {
-      slides[current].classList.remove('active');
-      dots[current]?.classList.remove('active');
+            // Calculate how far this slide is from the active one
+            var offset = i - currentIndex;
 
-      current = (n + slides.length) % slides.length;
+            // Wrap the offset so the carousel loops around
+            if (offset > totalSlides / 2) {
+                offset = offset - totalSlides;
+            }
+            if (offset < -totalSlides / 2) {
+                offset = offset + totalSlides;
+            }
 
-      track.style.transform = `translateX(-${current * 100}%)`;
-      slides[current].classList.add('active');
-      dots[current]?.classList.add('active');
+            // Assign the correct class based on position
+            if (offset === 0) {
+                slides[i].classList.add('fan-active');
+            } else if (offset === -1 || offset === -(totalSlides - 1)) {
+                slides[i].classList.add('fan-left');
+            } else if (offset === 1 || offset === totalSlides - 1) {
+                slides[i].classList.add('fan-right');
+            } else {
+                slides[i].classList.add('fan-hidden');
+            }
+        }
+
+        // Update dot indicators to match the current slide
+        for (var j = 0; j < dots.length; j++) {
+            dots[j].classList.remove('active');
+        }
+        if (dots[currentIndex]) {
+            dots[currentIndex].classList.add('active');
+        }
     }
 
-    function startAutoplay() {
-      autoplay = setInterval(() => goTo(current + 1), 5000);
+    // goTo: moves the carousel to a specific slide index
+    function goTo(index) {
+        // Use modulo to wrap around if index goes out of bounds
+        currentIndex = ((index % totalSlides) + totalSlides) % totalSlides;
+        updateCarousel();
     }
 
-    function stopAutoplay() {
-      clearInterval(autoplay);
+    // Previous button moves one slide to the left
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            goTo(currentIndex - 1);
+        });
     }
 
-    prevBtn?.addEventListener('click', () => goTo(current - 1));
-    nextBtn?.addEventListener('click', () => goTo(current + 1));
+    // Next button moves one slide to the right
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            goTo(currentIndex + 1);
+        });
+    }
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => goTo(Number(dot.dataset.dot)));
+    // Clicking a dot jumps directly to that slide
+    for (var d = 0; d < dots.length; d++) {
+        dots[d].addEventListener('click', function () {
+            var dotIndex = parseInt(this.getAttribute('data-dot'));
+            goTo(dotIndex);
+        });
+    }
+
+    // Clicking a side slide brings it to the centre
+    for (var s = 0; s < slides.length; s++) {
+        slides[s].addEventListener('click', function () {
+            // Only respond to clicks on slides that are not already active
+            if (!this.classList.contains('fan-active')) {
+                var slideIndex = parseInt(this.getAttribute('data-index'));
+                goTo(slideIndex);
+            }
+        });
+    }
+
+    // Keyboard navigation - left and right arrow keys
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+            goTo(currentIndex - 1);
+        }
+        if (e.key === 'ArrowRight') {
+            goTo(currentIndex + 1);
+        }
     });
 
-    container?.addEventListener('mouseenter', stopAutoplay);
-    container?.addEventListener('mouseleave', startAutoplay);
-
-    startAutoplay();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarousel);
-  } else {
-    initCarousel();
-  }
-})();
+    // Run once on load to set the initial positions
+    updateCarousel();
+}

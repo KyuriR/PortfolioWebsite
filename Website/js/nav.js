@@ -1,87 +1,108 @@
-/* ============================================================
-   nav.js — Reusable Navigation Injection (JS Interaction #1)
-   Dynamically injects the nav so it's never duplicated in HTML
-   ============================================================ */
+// nav.js
+// Injects the navigation bar and footer into every page using JavaScript
+// This means the nav HTML is never duplicated across pages
 
-(function () {
-  /* Determine active page */
-  const path = window.location.pathname;
-  const page = path.split('/').pop() || 'index.html';
+// Work out which page we are currently on
+var path = window.location.pathname;
+var currentPage = path.split('/').pop();
 
-  const links = [
-    { href: '../index.html',       label: 'Home',     id: 'index.html' },
-    { href: '../pages/about.html', label: 'About',    id: 'about.html' },
-    { href: '../pages/skills.html',label: 'Skills',   id: 'skills.html' },
-    { href: '../pages/projects.html', label: 'Projects', id: 'projects.html' },
-    { href: '../pages/contact.html', label: 'Contact', id: 'contact.html' },
-  ];
+// If the path ends with '/', we are on the homepage (index.html)
+if (currentPage === '') {
+    currentPage = 'index.html';
+}
 
-  /* Fix hrefs when already at root */
-  const isRoot = !path.includes('/pages/');
-  const navLinks = links.map(l => ({
-    ...l,
-    href: isRoot ? l.href.replace('../', '') : l.href,
-  }));
+// Check if we are at the root level or inside the pages folder
+var isRoot = path.indexOf('/pages/') === -1;
 
-  const liItems = navLinks.map(l =>
-    `<li><a href="${l.href}" class="${page === l.id ? 'active' : ''}">${l.label}</a></li>`
-  ).join('');
+// Define all navigation links
+// href is the link destination, label is the text shown, id is used to mark the active page
+var links = [
+    { href: 'index.html',          rootHref: '../index.html',          label: 'Home',     id: 'index.html'    },
+    { href: 'pages/about.html',    rootHref: '../pages/about.html',    label: 'About',    id: 'about.html'    },
+    { href: 'pages/skills.html',   rootHref: '../pages/skills.html',   label: 'Skills',   id: 'skills.html'   },
+    { href: 'pages/projects.html', rootHref: '../pages/projects.html', label: 'Projects', id: 'projects.html' },
+    { href: 'pages/contact.html',  rootHref: '../pages/contact.html',  label: 'Contact',  id: 'contact.html'  }
+];
 
-  const navHTML = `
-    <nav role="navigation" aria-label="Main navigation">
-      <a class="nav-logo" href="${isRoot ? 'index.html' : '../index.html'}">
-        Kyuri <span>Reddy</span>
-      </a>
-      <ul class="nav-links" id="nav-links-list">
-        ${liItems}
-      </ul>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  `;
+// Build the list of nav link items as an HTML string
+var navItems = '';
 
-  const container = document.getElementById('nav-container');
-  if (container) container.innerHTML = navHTML;
+for (var i = 0; i < links.length; i++) {
+    var link = links[i];
 
-  /* Hamburger toggle */
-  const hamburger = document.getElementById('nav-hamburger');
-  const linksList = document.getElementById('nav-links-list');
-  if (hamburger && linksList) {
-    hamburger.addEventListener('click', () => {
-      const open = linksList.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
+    // Pick the correct href depending on whether we are at root or in pages folder
+    var href = isRoot ? link.href : link.rootHref;
+
+    // Add the 'active' class to the link that matches the current page
+    var activeClass = '';
+    if (currentPage === link.id) {
+        activeClass = 'active';
+    }
+
+    navItems += '<li><a href="' + href + '" class="' + activeClass + '">' + link.label + '</a></li>';
+}
+
+// Work out the correct logo link depending on where we are
+var logoHref = isRoot ? 'index.html' : '../index.html';
+
+// Build the full nav HTML
+var navHTML = '<nav role="navigation" aria-label="Main navigation">'
+    + '<a class="nav-logo" href="' + logoHref + '">Kyuri <span>Reddy</span></a>'
+    + '<ul class="nav-links" id="nav-links-list">' + navItems + '</ul>'
+    + '<button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">'
+    + '<span></span><span></span><span></span>'
+    + '</button>'
+    + '</nav>';
+
+// Inject the nav into the page
+var navContainer = document.getElementById('nav-container');
+if (navContainer) {
+    navContainer.innerHTML = navHTML;
+}
+
+// Hamburger menu toggle for mobile
+var hamburger = document.getElementById('nav-hamburger');
+var navList = document.getElementById('nav-links-list');
+
+if (hamburger && navList) {
+    hamburger.addEventListener('click', function () {
+        // Toggle the open class to show or hide the menu
+        navList.classList.toggle('open');
+
+        // Update the aria-expanded attribute for accessibility
+        var isOpen = navList.classList.contains('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
     });
-    /* Close on link click (mobile) */
-    linksList.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        linksList.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
-      });
-    });
-  }
 
-  /* Lightbox global setup */
-  const overlay = document.createElement('div');
-  overlay.id = 'lightbox-overlay';
-  overlay.innerHTML = `<button id="lightbox-close" aria-label="Close lightbox">&times;</button><img src="" alt="Lightbox image" id="lightbox-img">`;
-  document.body.appendChild(overlay);
+    // Close the mobile menu when any nav link is clicked
+    var navLinks = navList.querySelectorAll('a');
+    for (var j = 0; j < navLinks.length; j++) {
+        navLinks[j].addEventListener('click', function () {
+            navList.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', false);
+        });
+    }
+}
 
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+// Build footer links depending on location
+var footerLinks = [
+    { href: 'index.html',          rootHref: '../index.html',          label: 'Home'     },
+    { href: 'pages/about.html',    rootHref: 'about.html',             label: 'About'    },
+    { href: 'pages/skills.html',   rootHref: 'skills.html',            label: 'Skills'   },
+    { href: 'pages/projects.html', rootHref: 'projects.html',          label: 'Projects' },
+    { href: 'pages/contact.html',  rootHref: 'contact.html',           label: 'Contact'  }
+];
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+var footerItems = '';
+for (var k = 0; k < footerLinks.length; k++) {
+    var fLink = footerLinks[k];
+    var fHref = isRoot ? fLink.href : fLink.rootHref;
+    footerItems += '<li><a href="' + fHref + '">' + fLink.label + '</a></li>';
+}
 
-  window.openLightbox = function (src, alt) {
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    img.alt = alt || '';
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  function closeLightbox() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-})();
+// Inject footer content
+var footerEl = document.querySelector('footer');
+if (footerEl) {
+    footerEl.innerHTML = '<ul class="footer-links">' + footerItems + '</ul>'
+        + '<p>&copy; 2026 Kyuri Reddy</p>';
+}

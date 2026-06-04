@@ -1,29 +1,27 @@
-/* ============================================================
-   scroll-reveal.js — Scroll-triggered reveal animations
-   Observes all .reveal elements and adds .visible on entry
-   ============================================================ */
+// scroll-reveal.js
+// Watches elements with the class 'reveal' and adds the class 'visible'
+// when they scroll into view. CSS handles the actual fade-in animation.
 
-(function () {
-  function initScrollReveal() {
-    const els = document.querySelectorAll('.reveal');
-    if (!els.length) return;
+// Get all elements that should animate in on scroll
+var revealElements = document.querySelectorAll('.reveal');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+// Create an IntersectionObserver to watch when elements enter the viewport
+// threshold: 0.12 means the animation triggers when 12% of the element is visible
+var observer = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+
+        // If the element is visible on screen, add the visible class
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+            entry.target.classList.add('visible');
+
+            // Stop watching this element once it has been revealed
+            observer.unobserve(entry.target);
         }
-      });
-    }, { threshold: 0.12 });
+    }
+}, { threshold: 0.12 });
 
-    els.forEach(el => observer.observe(el));
-  }
-
-  /* Run on DOM ready */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
-  }
-})();
+// Tell the observer to watch each reveal element
+for (var i = 0; i < revealElements.length; i++) {
+    observer.observe(revealElements[i]);
+}
