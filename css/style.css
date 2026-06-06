@@ -1,8 +1,3 @@
-/* ============================================================
-   KYURI REDDY PORTFOLIO — GLOBAL STYLES
-   The Methodical Creative
-   ============================================================ */
-/* NEW */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 /* ── CSS Variables ── */
 :root {
@@ -55,7 +50,6 @@ h1, h2, h3, h4 {
   letter-spacing: 0.01em;
 }
 
-/* ── Navigation (injected via JS) ── */
 #nav-container nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -211,8 +205,8 @@ h1, h2, h3, h4 {
 }
 
 .btn-outline {
-  background: transparent;
-  color: var(--white-dim);
+  background: rgba(128, 128, 128, 0.28);
+  color: var(--white);
   border: 1px solid var(--white-faint);
 }
 .btn-outline:hover {
