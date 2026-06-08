@@ -1,4 +1,4 @@
-/* ── Skills section layout ── */
+/* Skills section layout */
 .skills-section {
   padding: 80px 48px 100px;
   max-width: 1200px;
@@ -34,7 +34,7 @@
   gap: 20px;
 }
 
-/* ── Flip card ── */
+/* Flip card */
 .skill-card-wrap {
   perspective: 800px;
   height: 190px;
@@ -173,7 +173,6 @@
   color: var(--white);
 }
 
-/* ── Tools pill list ── */
 .tools-list {
   display: flex;
   flex-wrap: wrap;
@@ -198,7 +197,7 @@
   background: var(--bg-card-hover);
 }
 
-/* ── Responsive ── */
+
 @media (max-width: 900px) {
   .skills-grid { grid-template-columns: 1fr 1fr; }
   .skills-section { padding-left: 24px; padding-right: 24px; }

@@ -1,4 +1,4 @@
-/* ── Hero ── */
+/* Hero */
 .hero {
   position: relative;
   height: 100vh;
@@ -125,7 +125,7 @@
   50%       { opacity: 1; }
 }
 
-/* ── Intro section ── */
+/* Intro section */
 .intro-section {
   padding: 100px 48px;
   max-width: 1200px;
@@ -186,7 +186,7 @@
   color: var(--white-faint);
 }
 
-/* ── nav row ── */
+/* nav row */
 .page-nav-section {
   background: var(--bg-mid);
   border-top: 1px solid rgba(33, 150, 243, 0.08);
