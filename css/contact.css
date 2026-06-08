@@ -9,7 +9,7 @@
   align-items: start;
 }
 
-/* ── Left column - contact info ── */
+/* contact info */
 .contact-info h3 {
   font-family: var(--font-display);
   font-size: 1.8rem;
@@ -24,7 +24,6 @@
   margin-bottom: 32px;
 }
 
-/* Each contact detail row */
 .contact-item {
   display: flex;
   align-items: center;
@@ -70,7 +69,6 @@
   color: var(--white);
 }
 
-/* Social links row */
 .social-row {
   display: flex;
   gap: 10px;
@@ -99,7 +97,7 @@
   color: var(--white);
 }
 
-/* ── Right column - contact form ── */
+/* contact form  */
 .contact-form-wrap {
   background: var(--bg-card);
   border: 1px solid rgba(33, 150, 243, 0.12);
@@ -159,7 +157,6 @@ appearance: none;
   box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.12);
 }
 
-/* Error state */
 .form-group.error .form-input,
 .form-group.error .form-textarea,
 .form-group.error .form-select {
@@ -167,13 +164,11 @@ appearance: none;
   box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.12);
 }
 
-/* Success state */
 .form-group.success .form-input,
 .form-group.success .form-textarea {
   border-color: #4caf50;
 }
 
-/* Error message text */
 .form-error-msg {
   display: none;
   font-family: var(--font-mono);
@@ -187,7 +182,6 @@ appearance: none;
   display: block;
 }
 
-/* Success tick */
 .form-check {
   position: absolute;
   right: 14px;
@@ -202,7 +196,6 @@ appearance: none;
   opacity: 1;
 }
 
-/* Character counter */
 .char-count {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -215,7 +208,6 @@ appearance: none;
 .char-count.warn { color: #ff9800; }
 .char-count.over { color: #ef5350; }
 
-/* Submit row */
 .form-submit-row {
   display: flex;
   align-items: center;
@@ -234,7 +226,6 @@ appearance: none;
 .form-submit-status.show { display: block; }
 .form-submit-status.sent { color: #4caf50; }
 
-/* ── Responsive ── */
 @media (max-width: 900px) {
   .contact-layout {
     grid-template-columns: 1fr;

@@ -1,4 +1,3 @@
-/* ── Fan carousel section ── */
 .fan-section {
   position: relative;
   padding: 60px 0 100px;
@@ -29,7 +28,7 @@
   user-select: none;
 }
 
-/* Centre slide - full size */
+/* Centre slide */
 .fan-slide.fan-active {
   transform: translateX(0) scale(1);
   opacity: 1;
@@ -40,7 +39,7 @@
               0 0 40px rgba(33, 150, 243, 0.15);
 }
 
-/* Left slide - smaller and dimmed */
+/* Left slide */
 .fan-slide.fan-left {
   transform: translateX(-310px) scale(0.78);
   opacity: 0.55;
@@ -48,7 +47,7 @@
   z-index: 5;
 }
 
-/* Right slide - smaller and dimmed */
+/* Right slide */
 .fan-slide.fan-right {
   transform: translateX(310px) scale(0.78);
   opacity: 0.55;
@@ -64,7 +63,6 @@
   z-index: 1;
 }
 
-/* ── Visual area (record + background) ── */
 .fan-visual {
   position: relative;
   height: 300px;
@@ -87,7 +85,6 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ── Info panel ── */
 .fan-info {
   padding: 24px 28px 28px;
 }
@@ -152,7 +149,6 @@
   border: 1px solid rgba(33, 150, 243, 0.2);
 }
 
-/* ── Arrow buttons ── */
 .fan-arrow {
   position: absolute;
   top: 50%;
@@ -181,7 +177,6 @@
 .fan-arrow-left  { left: 24px; }
 .fan-arrow-right { right: 24px; }
 
-/* ── Dot indicators ── */
 .fan-dots {
   display: flex;
   justify-content: center;
@@ -203,7 +198,6 @@
   transform: scale(1.5);
 }
 
-/* ── Project modal ── */
 #project-modal {
   display: none;
   position: fixed;
@@ -337,7 +331,6 @@
   flex-wrap: wrap;
 }
 
-/* ── Responsive ── */
 @media (max-width: 900px) {
   .fan-stage { height: 500px; }
   .fan-slide { width: 280px; }

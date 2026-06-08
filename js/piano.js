@@ -1,8 +1,3 @@
-// piano.js
-// Draws a single row of piano keys across the full screen width
-// Each key moves up and down independently to create a ripple wave effect
-// White keys are drawn first, then black keys are drawn on top
-
 var canvas = document.getElementById('piano-canvas');
 
 if (canvas) {
@@ -18,8 +13,8 @@ if (canvas) {
     var BLACK_H = 260;
 
     var WAVE_AMPLITUDE = 19;
-    var WAVE_SPEED     = 0.0009;
-    var COL_PHASE      = 0.35;
+    var WAVE_SPEED= 0.0009;
+    var COL_PHASE= 0.35;
 
     var whiteKeys = [];
     var blackKeys = [];
@@ -34,16 +29,13 @@ if (canvas) {
         whiteKeys = [];
         blackKeys = [];
 
-        var baseY = H * 0.38;
+        var baseY = H * 0.22;
         var cols  = Math.ceil(W / WHITE_W) + 4;
 
         for (var i = -2; i < cols; i++) {
             var x = i * WHITE_W;
 
             whiteKeys.push({ index: i, x: x, y: baseY });
-
-            // Black keys appear after C, D, F, G, A in each octave
-            // No black key after E (pos 2) or B (pos 6)
             var pos = ((i % 7) + 7) % 7;
 
             if (pos === 0 || pos === 1 || pos === 3 || pos === 4 || pos === 5) {
@@ -65,7 +57,6 @@ if (canvas) {
         ctx.lineWidth   = 2;
         ctx.strokeRect(x, y, WHITE_W, WHITE_H);
 
-        // Sheen highlight at the top of the key
         var sheenOpacity = 0.08 + brightness * 0.1;
         ctx.fillStyle = 'rgba(255, 255, 255, ' + sheenOpacity + ')';
         ctx.fillRect(x + 5, y + 5, WHITE_W - 10, WHITE_H * 0.35);
@@ -73,8 +64,6 @@ if (canvas) {
 
     function drawBlackKey(x, y, brightness) {
         var tx = x - BLACK_W / 2;
-
-        // Drop shadow to make the black key look raised
         ctx.shadowColor   = 'rgba(0, 0, 0, 0.75)';
         ctx.shadowBlur    = 14;
         ctx.shadowOffsetY = 7;
@@ -87,11 +76,9 @@ if (canvas) {
         ctx.fillStyle = grad;
         ctx.fillRect(tx, y, BLACK_W, BLACK_H);
 
-        // Remove shadow for the next drawings
         ctx.shadowBlur    = 0;
         ctx.shadowOffsetY = 0;
 
-        // Highlight on the black key
         var highlightOpacity = 0.05 + brightness * 0.06;
         ctx.fillStyle = 'rgba(255, 255, 255, ' + highlightOpacity + ')';
         ctx.fillRect(tx + 4, y + 4, BLACK_W - 8, BLACK_H * 0.18);
@@ -104,7 +91,6 @@ if (canvas) {
     function loop(ts) {
         ctx.clearRect(0, 0, W, H);
 
-        // Draw white keys first so black keys appear on top
         for (var i = 0; i < whiteKeys.length; i++) {
             var wKey       = whiteKeys[i];
             var wPhase     = ts * WAVE_SPEED + wKey.index * COL_PHASE;
@@ -114,7 +100,6 @@ if (canvas) {
             drawWhiteKey(wKey.x, wKey.y + wOffset, wBrightness);
         }
 
-        // Draw black keys on top of white keys
         for (var j = 0; j < blackKeys.length; j++) {
             var bKey        = blackKeys[j];
             var bPhase      = ts * WAVE_SPEED + bKey.index * COL_PHASE;
@@ -131,7 +116,6 @@ if (canvas) {
     window.addEventListener('resize', resize);
     requestAnimationFrame(loop);
 
-    // Fade the piano out as the user scrolls down the page
     window.addEventListener('scroll', function () {
         var hero = document.getElementById('hero');
         if (!hero) return;
