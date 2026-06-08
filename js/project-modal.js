@@ -10,7 +10,7 @@ var projects = [
             + '<h4>Challenges</h4>'
             + '<p>The main challenge was balancing difficulty progression to keep the game engaging without becoming frustrating. I implemented a dynamic obstacle spawn system that increases density and speed over time, using Unity\'s coroutine system to manage timing cleanly.</p>',
         tech: ['Unity', 'C#', 'Game Design', 'Level Design'],
-        github: 'https://github.com/KyuriR'
+        github: 'https://github.com/KyuriR/TaxiRunner'
     },
     {
         num: 'Project 02',
@@ -62,7 +62,7 @@ var projects = [
             + '<h4>Challenges</h4>'
             + '<p>The core challenge was balancing strategic depth against computational efficiency under a strict 1000-move cap. Algorithm 1\'s lookahead was computationally heavy and occasionally redundant on smaller boards, sometimes overlooking immediate win opportunities. Algorithm 2 was fast and effective on 3×3 grids but lacked the long-term planning needed for complex 5×5 configurations. Debugging tile movement, merge logic, and the win and lose conditions required significant iteration. The project was completed over approximately 75 hours of combined development time.</p>',
         tech: ['C++', 'CodeBlocks', 'Best-First Search', 'Heuristic Algorithms'],
-        github: 'https://github.com/KyuriR/Reverse2048'
+        github: 'https://github.com/KyuriR/Reverse2048Git'
     }
 ];
 
