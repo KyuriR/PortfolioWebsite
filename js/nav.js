@@ -1,12 +1,6 @@
-// nav.js
-// Injects the navigation bar and footer into every page using JavaScript
-// This means the nav HTML is never duplicated across pages
-
-// Work out which page we are currently on
 var path = window.location.pathname;
 var currentPage = path.split('/').pop();
 
-// If the path ends with '/', we are on the homepage (index.html)
 if (currentPage === '') {
     currentPage = 'index.html';
 }
@@ -14,8 +8,6 @@ if (currentPage === '') {
 // Check if we are at the root level or inside the pages folder
 var isRoot = path.indexOf('/pages/') === -1;
 
-// Define all navigation links
-// href is the link destination, label is the text shown, id is used to mark the active page
 var links = [
     { href: 'index.html',          rootHref: '../index.html',          label: 'Home',     id: 'index.html'    },
     { href: 'pages/about.html',    rootHref: '../pages/about.html',    label: 'About',    id: 'about.html'    },
