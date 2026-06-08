@@ -18,39 +18,52 @@ var projects = [
         title: 'Neighbourhood Nightmare',
         screenshots: ['../assets/pictures/NN.png','../assets/pictures/NN2.png'],
         description: '<h4>Overview</h4>'
-            + '<p>Neighbourhood Nightmare is a top-down survival horror game where the player must escape a cursed residential neighbourhood. The atmosphere is built through dynamic lighting, sound design, and enemy AI that reacts to the player\'s movement and noise level.</p>'
-            + '<h4>Design &amp; Development</h4>'
-            + '<p>Built in Unity with C#, the game uses a sight and sound detection system for enemies — they respond to both line-of-sight and audio cues, forcing the player to think carefully about movement. The lighting system uses Unity\'s Universal Render Pipeline to create a dark, tense environment where visibility is limited.</p>'
-            + '<h4>Challenges</h4>'
-            + '<p>Implementing the dual-detection AI was the most complex part of the project. I designed a state machine with four states — Idle, Patrol, Alert, and Chase — that transitions based on detection thresholds. Getting these transitions to feel natural required significant playtesting and tuning.</p>',
-        tech: ['Unity', 'C#', 'AI State Machine', 'URP Lighting', 'Horror Design'],
+    + '<p>Neighbourhood Nightmare is a 2-player competitive arcade game adapted from a first-year roll-and-write board game. Two paranormal investigator teens race through a haunted neighbourhood map, visiting houses that trigger randomised ghost-themed minigames. The goal is to collect the most ghosts across five minigames — Ghost Shooter, Flappy Ghost, Ghost Breaker, Ghost Snake, and Pac Ghost — and ultimately reach and beat the final Ghost Kong level to win.</p>'
+    + '<h4>Design &amp; Development</h4>'
+    + '<p>Built in Unity with C#, the game features a fully explorable 2D pixel art map with three unlockable sections separated by bollards that increase in cost. Points scale per section — 1x, 1.5x, and 2x — rewarding players who push further into the neighbourhood. Each minigame was built independently by a team member and integrated into the main game using a persistent player management system with DontDestroyOnLoad to maintain scores across scene changes. Player movement uses WASD, with left click or K to interact.</p>'
+    + '<h4>Challenges</h4>'
+    + '<p>The biggest technical challenge was maintaining consistent score data across scene changes between the main map and each minigame. The team evaluated multiple approaches including JSON files, persistent GameObjects, and PlayerPrefs before settling on a DontDestroyOnLoad player manager. Individually, each minigame presented its own bugs — Ghost Shooter took multiple iterations before becoming stable, Ghost Snake had a collision issue where the snake could pass through the bottom border, and Flappy Ghost required tuning to reduce difficulty after playtest feedback flagged it as too punishing.</p>',
+        tech: ['Unity', 'C#', 'Pixel Art'],
         github: 'https://github.com/KyuriR'
     },
     {
         num: 'Project 03',
-        title: 'Project Zero',
+        title: 'Patient Zero',
         screenshots: ['../assets/pictures/PatientZero.png','../assets/pictures/PatientZero2.png'],
         description: '<h4>Overview</h4>'
-            + '<p>Project Zero is a stealth-action prototype set in a near-future dystopia where surveillance systems and armed guards patrol a corporate facility. The player must infiltrate the building, retrieve classified data, and escape without being detected.</p>'
-            + '<h4>Design &amp; Development</h4>'
-            + '<p>Built in C++ using SFML, the game features a line-of-sight detection system where guards have a visible cone of vision that the player must avoid. A cover mechanic allows the player to duck behind objects, temporarily hiding from detection.</p>'
-            + '<h4>Challenges</h4>'
-            + '<p>Implementing accurate line-of-sight raycasting in SFML without a built-in physics engine required building a custom collision and visibility system from scratch. This was a significant engineering challenge that deepened my understanding of computational geometry and 2D spatial logic.</p>',
-        tech: ['C++', 'SFML', 'Raycasting', 'Stealth Mechanics', 'Game Design'],
+    + '<p>Patient Zero is a first-person horror game set in an abandoned research hospital. You wake up with fragmented memories as a former test subject of Project Patient Zero — a dark experiment designed to push the limits of the human mind. Something went horribly wrong. The experiment shattered your memory and left you exposed to a contagious disease that consumes the mind and body. The others fled. You were left behind. Now you must uncover the truth and escape before the infection takes hold and Patient Zero finds you.</p>'
+    + '<h4>Design &amp; Development</h4>'
+    + '<p>Built in Unity with C#, the game is a first-person survival horror experience with an emphasis on atmosphere and tension. The hospital environment was designed to feel claustrophobic and disorienting, reinforcing the narrative of a mind unravelling. Core mechanics include exploration, environmental storytelling through documents and terminals, and evading the infected Patient Zero enemy that hunts the player through the facility.</p>'
+    + '<h4>Challenges</h4>'
+    + '<p>The biggest challenge was creating a genuinely tense atmosphere within the constraints of a student project. Getting the enemy AI to feel threatening without being unfair required significant tuning of patrol behaviour and detection ranges. Building the first-person perspective and ensuring smooth player movement and interaction systems in Unity also required learning several new engine features outside of prior coursework.</p>',
+        tech: ['C#', 'Unity'],
         github: 'https://github.com/KyuriR'
     },
     {
         num: 'Project 04',
         title: 'Morabaraba',
         screenshots: ['../assets/pictures/Morabaraba.png','../assets/pictures/Morabaraba2.png'],
-        description: '<h4>Overview</h4>'
-            + '<p>Morabaraba is a digital implementation of the traditional South African strategy board game, also known as Umlabalaba. Players place and move pieces to form "mills" — lines of three — which allow them to remove an opponent\'s piece. The last player with two or more pieces wins.</p>'
-            + '<h4>Design &amp; Development</h4>'
-            + '<p>Built in C# with Unity, the game supports two-player local play and a single-player mode against an AI opponent. The AI uses a minimax algorithm with alpha-beta pruning to evaluate board states and select optimal moves.</p>'
-            + '<h4>Challenges</h4>'
-            + '<p>Implementing minimax with alpha-beta pruning required careful design of the board evaluation function — assigning scores to mill formations, mobility, and piece count. Balancing AI difficulty so it was challenging but not unbeatable required multiple iterations of the heuristic weights.</p>',
-        tech: ['C#', 'Unity', 'Minimax AI', 'Alpha-Beta Pruning', 'Board Game Design'],
+      description: '<h4>Overview</h4>'
+    + '<p>Morabaraba is a digital implementation of the traditional South African strategy board game, also known as Umlabalaba. Built in Unity with C#, the game supports full online multiplayer via Photon PUN 2, where one player hosts a room and generates a room code for the second player to join, or both players use a quick join matchmaking system. The game enforces all official Morabaraba rules across four phases — placement, movement, flying, and mill removal — with automatic win condition detection.</p>'
+    + '<h4>Design &amp; Development</h4>'
+    + '<p>The system architecture separates the UI layer, game logic, and networking components. The GameManager script handles turn management, phase transitions, mill detection, and win conditions. Individual cow behaviour including drag-and-drop movement and phase-specific rules is managed through a dedicated Cow script. The project also features customizable board and piece themes, a move hint system that updates every 10 seconds during gameplay, an AI opponent with three difficulty levels, and a persistent leaderboard powered by LootLocker that tracks the top five players by win count.</p>'
+    + '<h4>Challenges</h4>'
+    + '<p>The biggest technical challenge was implementing online multiplayer. The project initially attempted Unity Netcode for GameObjects but encountered significant compatibility issues because the game logic had already been developed as a local single-player system before networking was added. The project then transitioned to Photon PUN 2 and briefly explored Mirror Networking before settling on Photon as the final solution. Key challenges included synchronising mill detection, cow removal, and phase transitions across clients using RPCs, and managing turn ownership to prevent simultaneous invalid actions. The AI system required implementing three distinct decision-making strategies — random selection for Easy, rule-based mill prioritisation for Medium, and Minimax with alpha-beta pruning for Hard.</p>',
+        tech: ['C#', 'Unity', 'Minimax AI', 'Photon PUN 2', 'LootLocker'],
         github: 'https://github.com/KyuriR/ELEN3020Morabaraba'
+    },
+    {
+        num: 'Project 05',
+        title: 'Reverse 2048',
+        screenshots: ['../assets/pictures/Reverse 2048.png','../assets/pictures/Reverse 2048 2.png'],
+       description: '<h4>Overview</h4>'
+    + '<p>Reverse 2048 is a strategic puzzle game and the inverse of the classic 2048 — instead of building tiles up to 2048, players must systematically reduce tiles down to the smallest possible value of 2. The project implemented and evaluated two competing AI algorithms designed to solve any valid board configuration across 3×3, 4×4, and 5×5 grids with initial tile values of 128, 256, or 512. The game ends when a tile reaches 2, the 1000-move limit is exceeded, or no valid merges remain.</p>'
+    + '<h4>Design &amp; Development</h4>'
+    + '<p>Built in C++ using CodeBlocks, the project implemented two distinct algorithmic strategies. Algorithm 1 uses a best-first search with depth-limited lookahead, evaluating moves based on maximum tile value, merge opportunities, and empty cell count. Algorithm 2 uses a heuristic greedy strategy that prioritises immediate merges and penalises high-value tiles for fast, lightweight decision-making. The architecture cleanly separates board logic from algorithmic decision-making, allowing either algorithm to operate on any valid configuration without modification.</p>'
+    + '<h4>Challenges</h4>'
+    + '<p>The core challenge was balancing strategic depth against computational efficiency under a strict 1000-move cap. Algorithm 1\'s lookahead was computationally heavy and occasionally redundant on smaller boards, sometimes overlooking immediate win opportunities. Algorithm 2 was fast and effective on 3×3 grids but lacked the long-term planning needed for complex 5×5 configurations. Debugging tile movement, merge logic, and the win and lose conditions — particularly ensuring tiles could not move off grid edges and that random tile spawning behaved correctly across different starting configurations — required significant iteration. The project was completed over approximately 75 hours of combined development time.</p>',
+        tech: ['C++', 'CodeBlocks', 'Best-First Search', 'Heuristic Algorithms'],
+        github: 'https://github.com/KyuriR/ELEN3020Reverse2048'
     }
 ];
 
