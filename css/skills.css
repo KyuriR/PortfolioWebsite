@@ -196,8 +196,6 @@
   color: var(--white);
   background: var(--bg-card-hover);
 }
-
-
 @media (max-width: 900px) {
   .skills-grid { grid-template-columns: 1fr 1fr; }
   .skills-section { padding-left: 24px; padding-right: 24px; }
@@ -206,4 +204,35 @@
 @media (max-width: 560px) {
   .skills-grid { grid-template-columns: 1fr; }
   .skill-card-wrap { height: 170px; }
+}
+
+@media (max-width: 768px) {
+  .skill-card-wrap {
+    height: auto;
+    min-height: 190px;
+  }
+
+  .skill-front,
+  .skill-back {
+    position: relative;
+    min-height: 190px;
+  }
+
+  .skill-card-wrap:not(.flipped) .skill-back {
+    display: none;
+  }
+
+  .skill-card-wrap.flipped .skill-front {
+    display: none;
+  }
+
+  .skill-card-wrap.flipped .skill-card-inner {
+    transform: none;
+  }
+
+  .skill-back {
+    transform: none;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
 }
