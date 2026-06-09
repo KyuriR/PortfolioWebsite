@@ -29,12 +29,6 @@ function updateCarousel() {
             slides[i].classList.add('fan-hidden');
         }
     }
-    for (var j = 0; j < dots.length; j++) {
-        dots[j].classList.remove('active');
-    }
-    if (dots[currentIndex]) {
-        dots[currentIndex].classList.add('active');
-    }
 }
 
 function goTo(index) {
@@ -48,13 +42,6 @@ prevBtn.addEventListener('click', function () {
 nextBtn.addEventListener('click', function () {
     goTo(currentIndex + 1);
 });
-
-for (var d = 0; d < dots.length; d++) {
-    dots[d].addEventListener('click', function () {
-        var dotIndex = parseInt(this.getAttribute('data-dot'));
-        goTo(dotIndex);
-    });
-}
 
 // Clicking a side slide brings it to the centre
 for (var s = 0; s < slides.length; s++) {

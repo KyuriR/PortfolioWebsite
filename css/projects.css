@@ -177,27 +177,6 @@
 .fan-arrow-left  { left: 24px; }
 .fan-arrow-right { right: 24px; }
 
-.fan-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 32px;
-}
-
-.fan-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--white-faint);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.fan-dot.active {
-  background: var(--blue-accent);
-  transform: scale(1.5);
-}
-
 #project-modal {
   display: none;
   position: fixed;
